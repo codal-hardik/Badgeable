@@ -67,7 +67,7 @@ public extension Badgeable {
             labelFrame.size.width = labelFrame.size.height
         }
         badgeLabel.frame = labelFrame
-        badgeLabel.layer.cornerRadius = labelFrame.size.height / 2.0
+        badgeLabel.layer.cornerRadius = 2
         badgeLabel.isHidden = badgeCount == 0
         
         // Add to super view, adjust frame
@@ -98,10 +98,14 @@ public extension Badgeable {
         let label = UILabel()
         label.clipsToBounds = true
         label.font = UIFont.systemFont(ofSize: 10.0)
-        label.backgroundColor = UIColor.red
+        if #available(iOS 10.0, *) {
+            label.backgroundColor = UIColor(displayP3Red: 193/255, green: 65/255, blue: 65/255, alpha: 1)
+        } else {
+            // Fallback on earlier versions
+            label.backgroundColor = UIColor(red: 193/255, green: 65/255, blue: 65/255, alpha: 1)
+        }
         label.textColor = UIColor.white
         label.textAlignment = .center
         return label
     }
-    
 }
